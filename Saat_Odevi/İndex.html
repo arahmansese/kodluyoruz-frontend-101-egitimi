@@ -25,7 +25,12 @@
             Javascript bölümü 1. Ödevindesiniz.
         </div>
     </div>
-    <script src="js/clock.js"></script>
+    <script>
+        let inputName = prompt("lütfen adınızı giriniz.");
+        document.getElementById('myName').textContent = inputName;
+
+        var digitalClock = new Date().getHours() 
+    </script>
 </body>
 
 </html>
