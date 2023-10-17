@@ -86,20 +86,92 @@ const menu = [
 
 
 
- console.log(menu[1])
+//  console.log(menu[1])
 
- for ( var i = 0 ; i < menu.length; i++){
-   console.log(menu[i].title)
- }
+//  for ( var i = 0 ; i < menu.length; i++){
+//    console.log(menu[i].title)
+//  }
 
 
- function displayMenu() {
-   var menuContainer = document.getElementById("section-center")
+//  function displayMenu() {
+//    var menuContainer = document.getElementById("section-center")
 
-   var menuHtml = '0';
-   for (var i = 0 ;  i<menu.length ; i++){
-     menuHtml += `
-     <div class ="section-center">`
-   }
- }
+//    var menuHtml = '0';
+//    for (var i = 0 ;  i<menu.length ; i++){
+//      menuHtml += `
+//      <div class ="section-center">`
+//    }
+//  }
 
+// HTML öğelerini seçer
+const btnContainer = document.querySelector(".btn-container");
+const foodMenu = document.querySelector(".section-center");
+
+// Menü öğeleri için bir dizi oluşturur
+let foodItems = "";
+
+// Dizideki her öğe için HTML kodu oluşturur
+menu.forEach((element) => {
+  foodItems += `
+    <div class="menu-items col-lg-6 col-sm-12">
+      <img src="${element.img}" class="photo">
+      <div class="menu-info">
+        <div class="menu-title">
+          <h4>${element.title}</h4>
+          <h4 class="price">${element.price}</h4>
+        </div>
+        <div class="menu-text">${element.desc}</div>
+      </div>
+    </div>`;
+});
+// Menü öğelerini sayfaya ekler
+foodMenu.innerHTML = foodItems;
+
+
+
+// Düğmeler için bir dizi oluşturur
+const buttons = [
+  { id: "All", text: "All" },
+  { id: "Korea", text: "Korea" },
+  { id: "Japan", text: "Japan" },
+  { id: "China", text: "China" }
+];
+
+
+// Düğmeler için HTML kodu oluşturur
+const buttonItems = buttons
+  .map((button) => `<button id="${button.id}">${button.text}</button>`)
+  .join("");
+
+
+
+// Düğmeleri sayfaya ekler
+btnContainer.innerHTML = buttonItems;
+
+
+// Düğmelere tıklanınca menü öğelerini filtreler
+btnContainer.addEventListener("click", (e) => 
+{
+  if (e.target.tagName === "BUTTON") 
+  {
+    const id = e.target.id;
+    const filteredItems = menu.filter((item) => item.category === id || id === "All");
+    const filteredItemsHTML = filteredItems
+      .map((item) => 
+      `
+        <div class="menu-items col-lg-6 col-sm-12">
+          <img src="${item.img}" class="photo">
+          <div class="menu-info">
+            <div class="menu-title">
+              <h4>${item.title}</h4>
+              <h4 class="price">${item.price}</h4>
+            </div>
+            <div class="menu-text">${item.desc}</div>
+          </div>
+        </div>
+      `
+      )
+      .join("");
+    foodMenu.innerHTML = filteredItemsHTML;
+  }
+});
