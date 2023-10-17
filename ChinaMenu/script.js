@@ -1,3 +1,5 @@
+// Sayfa yüklendiğinde menü öğelerini görüntüle
+
 const menu = [
     {
       id: 1,
@@ -82,7 +84,22 @@ const menu = [
     },
   ];
 
-menu.forEach(function(isim){
-  
-})
-  
+
+
+ console.log(menu[1])
+
+ for ( var i = 0 ; i < menu.length; i++){
+   console.log(menu[i].title)
+ }
+
+
+ function displayMenu() {
+   var menuContainer = document.getElementById("section-center")
+
+   var menuHtml = '0';
+   for (var i = 0 ;  i<menu.length ; i++){
+     menuHtml += `
+     <div class ="section-center">`
+   }
+ }
+

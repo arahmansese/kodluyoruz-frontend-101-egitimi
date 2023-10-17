@@ -56,11 +56,11 @@ ul li.checked::before {
   padding: 12px 16px 12px 16px;
 }
 
-  .close:hover {
-    background-color: #f78501;
-    color: white;
+.close:hover {
+  background-color: #f78501;
+  color: white;
 
-  }
+}
 
 .header {
   background-color: #f78501;

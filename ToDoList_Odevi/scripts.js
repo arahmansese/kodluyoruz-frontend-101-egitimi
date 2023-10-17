@@ -6,24 +6,24 @@
 // Yazdığınız js dosyasını projenize eklemeyi unutmayın.
 // Yaptığınız yapıya Local Storage'ı da ekleyip verilerin kaybolmamasını sağlayın.
 
-let addedButton = document.querySelector('.button')
-let taskList = document.querySelector('#list')
-var items = document.querySelectorAll('li')
+let addedButton = document.querySelector('.button');
+let taskList = document.querySelector('#list');
+var items = document.querySelectorAll('li');
+const toasts = document.querySelectorAll("#liveToast");
 
 //sayfa yuklediginde locaStorage den veri cekme islemi
 document.addEventListener("DOMContentLoaded", function () { 
     showData()
 });
 
-// function emptyAlert() {
-//     var toast = new bootstrap.Toast(document.getElementById('liveToast'));
-//     toast.show();
-// }
+ function emptyAlert() {
+     var toast = new bootstrap.Toast(document.getElementById('liveToast'));
+     toast.show();
+}
 
 function showData(){
     var localItems = JSON.parse(localStorage.getItem("localItems")) || [];
-    var ul = document.querySelector('#list')
-//    ul.innerHTML = '';
+    var ul = document.querySelector('#list');
 
     localItems.forEach( function(data){
         var li = document.createElement("li")
@@ -34,9 +34,7 @@ function showData(){
 }
 
 function newElement(){
-    var taskLine = (document.querySelector('#task').value);
-
-//    showData(taskLine)
+    var taskLine = (document.querySelector('#task').value.trim());
     console.log(taskLine);
     if(!taskLine==""){
         var localItems = JSON.parse(localStorage.getItem('localItems')) || [];
@@ -47,12 +45,16 @@ function newElement(){
          newTask.textContent = taskLine; 
          document.getElementById("list").appendChild(newTask)
         document.getElementById('task').value = ""; 
+        $(toasts[0]).toast("show");
+        return;
 
-    }if(taskLine ==""){
+    }else{
 
-        //emptyAlert()// bir bilene sorulacak. yaptim olmadi neden ?
-        // toast body arastrilip bakilacak
-        alert('bos eleman ekleyemezsiniz !!!')
+        // emptyAlert()// bir bilene sorulacak. yaptim olmadi neden ?
+        // // toast body arastrilip bakilacak
+        // alert('bos eleman ekleyemezsiniz !!!')
+        $(toasts[1]).toast("show");
+        return;
 
     }
     
